@@ -1,8 +1,14 @@
 package org.apache.camel.community.so;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jackson.JacksonDataFormat;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -13,32 +19,40 @@ import org.springframework.stereotype.Component;
  * Use <tt>@Component</tt> to make Camel auto detect this route when starting.
  */
 @Component
+@Slf4j
 public class MySpringBootRouter extends RouteBuilder {
 
     @Override
     public void configure() {
 
         restConfiguration()
-        .component("undertow")
-        .host("127.0.0.1")
-        .port(9090)
-        .bindingMode(RestBindingMode.auto)
-        .dataFormatProperty("prettyPrint", "true");
+                .component("undertow")
+                .host("127.0.0.1")
+                .port(9090)
+                //This works only when a POJO mapping is possible - Ref: https://camel.apache.org/manual/latest/rest-dsl.html
+                //<quote>When using binding you must also configure what POJO type to map to. This is mandatory for incoming messages, and optional for outgoing.</quote>
+                //.bindingMode(RestBindingMode.json)
+                .dataFormatProperty("prettyPrint", "true");
 
 
-    rest("/api")
-        .post("/erroradmin").consumes(MediaType.APPLICATION_JSON_VALUE).type(ErrorType.class).to("direct:postError")
-        .get("/erroradmin/{id}").produces(MediaType.APPLICATION_JSON_VALUE).to("direct:getError");
+        rest("/api")
+                .post("/erroradmin")
+                .to("direct:postError")
 
-    from("direct:getError")
-        .process( exchange -> {
-           exchange.getMessage().setBody(("{'messageID':'"+ UUID.randomUUID().toString() +"','ticketID':'000000'}"));
-        });
-    from("direct:postError")
-        .process(exchange -> {
-            ErrorType typ = exchange.getIn().getBody(ErrorType.class);
-            System.out.println(String.format("Received Type:%s {MessageID: %s, TicketID: %s} ",typ.getClass().getName(),typ.getMessageID(),typ.getTicketID()));
-        }).transform().constant("200 OK");
+                .get("/erroradmin/{id}").to("direct:getError");
+
+        from("direct:getError")
+                .process(exchange -> {
+                    exchange.getMessage().setBody(("{'messageID':'" + UUID.randomUUID().toString() + "','ticketID':'1234'}"));
+                });
+
+        from("direct:postError")
+                .unmarshal()
+                .json(JsonLibrary.Jackson)
+                .process(exchange -> {
+                    log.info("Type of incoming body:{}", exchange.getIn().getBody().getClass().getName());
+                    log.info("Incoming body:{}", exchange.getIn().getBody());
+                }).transform().constant("{'httpResponse:200':'OK'}");
     }
 
 }
