@@ -1,6 +1,10 @@
 package org.apache.camel.community.so;
 
+import java.util.UUID;
+
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.rest.RestBindingMode;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,12 +17,28 @@ public class MySpringBootRouter extends RouteBuilder {
 
     @Override
     public void configure() {
-        from("timer:hello?period={{timer.period}}").routeId("hello")
-            .transform().method("myBean", "saySomething")
-            .filter(simple("${body} contains 'foo'"))
-                .to("log:foo")
-            .end()
-            .to("stream:out");
+
+        restConfiguration()
+        .component("undertow")
+        .host("127.0.0.1")
+        .port(9090)
+        .bindingMode(RestBindingMode.auto)
+        .dataFormatProperty("prettyPrint", "true");
+
+
+    rest("/api")
+        .post("/erroradmin").consumes(MediaType.APPLICATION_JSON_VALUE).type(ErrorType.class).to("direct:postError")
+        .get("/erroradmin/{id}").produces(MediaType.APPLICATION_JSON_VALUE).to("direct:getError");
+
+    from("direct:getError")
+        .process( exchange -> {
+           exchange.getMessage().setBody(("{'messageID':'"+ UUID.randomUUID().toString() +"','ticketID':'000000'}"));
+        });
+    from("direct:postError")
+        .process(exchange -> {
+            ErrorType typ = exchange.getIn().getBody(ErrorType.class);
+            System.out.println(String.format("Received Type:%s {MessageID: %s, TicketID: %s} ",typ.getClass().getName(),typ.getMessageID(),typ.getTicketID()));
+        }).transform().constant("200 OK");
     }
 
 }
