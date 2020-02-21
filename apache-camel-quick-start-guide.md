@@ -21,4 +21,33 @@ mvn -DgroupId=org.apache.camel.community \
 org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate
 ````
 
-If everything went 
+If everything went well, Maven will generate a skeleton project for you as shown in the example below logs. Note that this is not the entire log but just the last part of it.
+
+````
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: camel-archetype-spring-boot:3.0.1
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: org.apache.camel.community
+[INFO] Parameter: artifactId, Value: apache-camel-quickstart
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] Parameter: package, Value: org.apache.camel.community
+[INFO] Parameter: packageInPathFormat, Value: org/apache/camel/community
+[INFO] Parameter: maven-resources-plugin-version, Value: <your.version.here>
+[INFO] Parameter: maven-war-plugin-version, Value: <your.version.here>
+[INFO] Parameter: groupId, Value: org.apache.camel.community
+[INFO] Parameter: maven-compiler-plugin-version, Value: <your.version.here>
+[INFO] Parameter: spring-boot-version, Value: <spring.boot.version>
+[INFO] Parameter: slf4j-version, Value: <slf4j.version>
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] Parameter: log4j-version, Value: <log4j.version>
+[INFO] Parameter: camel-version, Value: 3.0.1
+[INFO] Parameter: package, Value: org.apache.camel.community
+[INFO] Parameter: artifactId, Value: apache-camel-quickstart
+[INFO] Project created from Archetype in dir: <your directory name here>\apache-camel-quickstart
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.00 s
+[INFO] Finished at: 2020-01-01T13:00:00+01:00
+[INFO] ------------------------------------------------------------------------
+````
