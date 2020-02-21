@@ -101,7 +101,7 @@ Hello World
 ````
 Congratulations!! Now that you've just created your first Apache Camel project and ran it successfully, let's see what happened behind the scenes.
 
-# TL;DR: Use maven achetype to create a project and start it with spring-boot
+### TL;DR: Use maven achetype to create a project and start it with spring-boot
 ````
 mvn -DgroupId=org.apache.camel.community -DartifactId=apache-camel-quickstart -Dversion=1.0-SNAPSHOT -DarchetypeGroupId=org.apache.camel.archetypes -DarchetypeArtifactId=camel-archetype-spring-boot -DarchetypeVersion=3.0.1 -DinteractiveMode=false org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate
 mvn spring-boot:run
