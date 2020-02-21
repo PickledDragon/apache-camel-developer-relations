@@ -69,7 +69,7 @@ This command will start the quick start project and you should see output simila
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.2.1.RELEASE)
 
-2020-02-21 13:34:36.783  INFO 13792 --- [           main] o.a.c.community.MySpringBootApplication  : Starting MySpringBootApplication on WPU8L0050493 with PID 13792 (C:\workspace\projects\stackoverflow\apache-camel-quickstart\target\classes started by BN83XR in c:\workspace\projects\stackoverflow\apache-camel-quickstart)
+2020-02-21 13:34:36.783  INFO 13792 --- [           main] o.a.c.community.MySpringBootApplication  : Starting MySpringBootApplication on YOUR_HOST_NAME with PID 100000 (<your-directory>\apache-camel-quickstart\target\classes started by <your-userid-here> in <your-directory>\apache-camel-quickstart)
 2020-02-21 13:34:36.786  INFO 13792 --- [           main] o.a.c.community.MySpringBootApplication  : No active profile set, falling back to default profiles: default
 2020-02-21 13:34:37.811  INFO 13792 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.apache.camel.spring.boot.CamelAutoConfiguration' of type [org.apache.camel.spring.boot.CamelAutoConfiguration$$EnhancerBySpringCGLIB$$72a2a9b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
 2020-02-21 13:34:38.356  WARN 13792 --- [           main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
