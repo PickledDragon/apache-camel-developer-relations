@@ -6,6 +6,10 @@ We'll be using Maven archetypes to get started in a single command. We assume yo
 
 Open a terminal, change to a directory where you would like to create a sample Apache Camel project and run the following command.
 
+````Powershell
+mvn -DgroupId=org.apache.camel.community -DartifactId=apache-camel-quickstart -Dversion=1.0-SNAPSHOT -DarchetypeGroupId=org.apache.camel.archetypes -DarchetypeArtifactId=camel-archetype-spring-boot -DarchetypeVersion=3.0.1 -DinteractiveMode=false org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate
+````
+If your terminal supports escaping line breaks with `\` character, the following block may be used. They do exactly the same thing!
 ````bash
 mvn -DgroupId=org.apache.camel.community \ 
 -DartifactId=apache-camel-quickstart \
@@ -13,5 +17,8 @@ mvn -DgroupId=org.apache.camel.community \
 -DarchetypeGroupId=org.apache.camel.archetypes \
 -DarchetypeArtifactId=camel-archetype-spring-boot \
 -DarchetypeVersion=3.0.1 \
+-DinteractiveMode=false \
 org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate
 ````
+
+If everything went 
