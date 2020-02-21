@@ -1,5 +1,5 @@
 # Apache Camel Quickstart
-> There is a TL;DR at the end, if you're in a real hurry!
+> If you're in a real hurry, we still have good news! There is a TL;DR at the end!
 
 Apache Camel is a versatile integration framework and allows several modes of deployment. Apache Camel can be deployed as a stand-alone application, in a servlet container, in an OSGi container, as a Kubernetes operator or as a Kafka Connect connector. 
 
